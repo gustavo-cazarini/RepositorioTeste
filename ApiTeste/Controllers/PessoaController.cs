@@ -16,7 +16,14 @@ namespace ApiTeste.Controllers
         [HttpGet("[action]")]
         public IEnumerable<Pessoa> GetAll()
         {
-            return Pessoas.ToArray();
+            int repeticoes = 100;
+
+            var repetida = Pessoas
+                .SelectMany(p => Enumerable.Repeat(p, repeticoes))
+                .ToList();
+
+
+            return repetida.ToArray();
         }
 
         [HttpGet("[action]")]
